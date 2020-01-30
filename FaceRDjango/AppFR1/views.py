@@ -10,6 +10,17 @@ from rest_framework import status
 from rest_framework import generics
 import face_recognition
 # Create your views here.
+class AddBranche(generics.ListCreateAPIView):
+    serializer_class = BrancheSerializer
+    queryset = Branche.objects.all()
+
+class AddStudyingYear(generics.ListCreateAPIView):
+    serializer_class = StudyingYearSerializer
+    queryset = StudyingYear.objects.all()
+
+class AddSection(generics.ListCreateAPIView):
+    serializer_class = SectionSerializer
+    queryset = Section.objects.all()
 
 class AddStudents(generics.ListCreateAPIView):
     serializer_class = DataSerializer
@@ -37,6 +48,3 @@ class ProcessStudents(generics.ListAPIView):
     # #code need to be added for breaking video into frames and further processing
         print(queryset)
         return queryset
-    
-        
-    
