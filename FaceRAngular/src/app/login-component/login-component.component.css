@@ -1,0 +1,43 @@
+.Tophead{
+    text-align: center;
+    margin-bottom: 10%;
+  }
+  .example-form{
+    width: 100%;
+  }
+  .form-style{
+    width: 80%;
+    text-align: center;
+    margin-bottom: 10%;
+  }
+  
+  .SLogin,.FLogin{
+    margin-top: 15%;
+    width: 45%;
+  }
+  
+  .FLogin{
+    float: left;
+  }
+  .SLogin{
+    float: right;
+  }
+  
+  .content{
+    text-align: center;
+  }
+  .only-width{
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .Login{
+    width: 100%;
+    height: 100%;
+    background-image: url('https://www.chawadi.com/wp-content/uploads/2019/10/379501_inspirational-background_2000x1200_1_1920x1080.jpg');
+  }
+  
+  
+  
+  
