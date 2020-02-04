@@ -12,4 +12,8 @@ export class UserService {
   LoginUser(userData): Observable<any> {
     return this.http.post('http://localhost:8000/auth/', userData);
   }
+
+  upload(formData) {
+    return this.http.post('http://localhost:8000/upload/', formData);
+  }
 }

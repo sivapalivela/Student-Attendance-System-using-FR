@@ -9,4 +9,12 @@
   </span>
 </mat-toolbar>
 <app-login-component *ngIf = "!userdetected"></app-login-component>
+<div>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    
+    <input type="file" name="profile" (change)="onChange($event)" />
+    <button type="submit">Upload video File</button>
+
+  </form>
+</div>
 

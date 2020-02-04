@@ -1,10 +1,13 @@
 import os
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+Template_DIR = os.path.join(BASE_DIR,'Templates')
 
-# SECURITY WARNING: keep the secret key used in production secret!
+Static_DIR = os.path.join(BASE_DIR,'static')
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
 SECRET_KEY = '_2!5du5^47=6_z83!ajz2ay8=kr&s7n7v3z885jj=5)0mvi00w'
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -44,7 +47,7 @@ ROOT_URLCONF = 'FaceRDjango.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [Template_DIR,],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -83,7 +86,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'Asia/Kolkata'
@@ -95,5 +97,9 @@ USE_L10N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [Static_DIR]
+
+MEDIA_URL =  '/media/'
 
 APPEND_SLASH = False

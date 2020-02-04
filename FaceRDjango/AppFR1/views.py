@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import Http404
-from .models import Student
-from .forms import StudentForm
+from .models import *
+from django.contrib.auth.models import User
 from .serializers import *
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -9,11 +9,13 @@ from rest_framework.request import Request
 from rest_framework import status
 from rest_framework import generics
 import face_recognition
+import numpy as np
 from django.contrib.auth.models import User
 from rest_framework import viewsets
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
-
+from rest_framework.parsers import FileUploadParser,MultiPartParser
+from django.http import HttpResponse
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all().order_by('-date_joined')
@@ -21,42 +23,58 @@ class UserViewSet(viewsets.ModelViewSet):
     # authentication_classes = (TokenAuthentication,)
     # permission_classes = (IsAuthenticated,)
 
-# Create your views here.
-class AddBranche(generics.ListCreateAPIView):
-    serializer_class = BrancheSerializer
-    queryset = Branche.objects.all()
+class Allocate_Classes(APIView):
+    def post(self, request, *args, **kwargs):
+       Allocate = Allocate_class(
+           Faculty_ID = User.objects.get(username = request.data['Faculty_ID']),
+           Allocated_Branch = Branche(Branch = request.data['Branch']),
+           Allocate_Studying_Year = StudyingYear(Studying_Year = request.data['Studying_Year']),
+           Allocated_Semester = Semester(Semester = request.data['Semester']),
+           Allocated_Section = Section(Section = request.data['Section']),
+           Allocated_Period = Period(Period = request.data['Period']),
+           Day_of_Week = request.data['Day']
+       )
+       Allocate.save()
+       return HttpResponse("Class Allocated Successfully !!")
 
-class AddStudyingYear(generics.ListCreateAPIView):
-    serializer_class = StudyingYearSerializer
-    queryset = StudyingYear.objects.all()
+class AddStudent(APIView):
+    parser_class = (FileUploadParser,)
+    def post(self, request, *args, **kwargs):
+       Encode_Student = {}
+       Student_Image = request.data['Image']
 
-class AddSection(generics.ListCreateAPIView):
-    serializer_class = SectionSerializer
-    queryset = Section.objects.all()
+       # code for converting image to encoding and then adding to dictionary "Encode_Student"
 
-class AddStudents(generics.ListCreateAPIView):
-    serializer_class = DataSerializer
-    def get_queryset(self):
-        Roll_Number = self.request.query_params.get('Rollno',None)
-        Studying_Year = self.request.query_params.get('Year', None)
-        Branch = self.request.query_params.get('Branch',None)
-        Section = self.request.query_params.get('Section',None)
-        # image_load = #code need to be added for getting image
-        # Encoding = #code for generating image encoding
-
-        # Data_obj = StudentForm(Roll_Number=Roll_Number,Studying_Year=Studying_Year,Branch =                             Branch,Section = Section, Encoding = Encoding)
-        # Data_obj.save(commit=True)
+       ADD_Student = Student(
+          Roll_Number = request.data['Roll_number'],
+          Studying_Year = StudyingYear(Studying_Year=request.data['Studying_Year']),
+          Branch = Branche(Branch = request.data['Branch']),
+          Section = Section(Section = request.data['Section']),
+          Semester = Semester(Semester = request.data['Semester']),
+          Encoding = Encode_Student
+       )
+       ADD_Student.save()
+       return HttpResponse("Student Added Succesfully with Roll Number" + str(request.data['Roll_number']) +" !!")
 
 
-class ProcessStudents(generics.ListAPIView):
-    serializer_class = DataSerializer
-    def get_queryset(self):
-        queryset = Student.objects.all()
-        Studying_Year = self.request.query_params.get('Year', None)
-        Branch = self.request.query_params.get('Branch',None)
-        Section = self.request.query_params.get('Section',None)
-        if Studying_Year is not None and Branch is not None and Section is not None:
-            queryset = queryset.filter(Studying_Year = Studying_Year,Branch = Branch,Section = Section)
-    # #code need to be added for breaking video into frames and further processing
-        print(queryset)
-        return queryset
+class AddAttendance(APIView):
+    parser_class = (FileUploadParser,)
+    def post(self, request, *args, **kwargs):
+      list_of_students = {}
+      Attendance_Video = request.data['Video']
+
+      # code for dividing video into frames and then add present student numbers to dictionary "list_of_students"
+
+      Attended = Attendance(
+          Studying_Year = StudyingYear(Studying_Year = request.data['Studying_Year']),
+          Semester = Semester(Semester = request.data['Semester']),
+          Branch = Branche(Branch = request.data['Branch']),
+          Section = Section(Section = request.data['Section']),
+          Period = Period(Period = request.data['Period']),
+          Faculty_ID = User.objects.get(username = request.data['Faculty_ID']),
+          Attendance = list_of_students 
+      )
+      Attended.save()
+      return HttpResponse(list_of_students)
+    
+

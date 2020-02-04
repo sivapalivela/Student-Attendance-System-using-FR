@@ -12,6 +12,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatMenuModule} from '@angular/material/menu';
+import { ReactiveFormsModule } from '@angular/forms';
 import 'hammerjs';
 import { LoginComponentComponent } from './login-component/login-component.component';
 @NgModule({
@@ -31,7 +32,8 @@ import { LoginComponentComponent } from './login-component/login-component.compo
     MatCardModule,
     MatInputModule,
     MatButtonModule,
-    MatMenuModule
+    MatMenuModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
