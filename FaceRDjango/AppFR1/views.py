@@ -1,29 +1,38 @@
-from django.shortcuts import render
-from django.http import Http404
-from .models import *
-from django.contrib.auth.models import User
-from .serializers import *
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework.request import Request
-from rest_framework import status
-from rest_framework import generics
-import face_recognition
 import numpy as np
-from django.contrib.auth.models import User
+from .models import *
+import face_recognition
+from .serializers import *
+from django.http import Http404
+from rest_framework import status
+from django.shortcuts import render
 from rest_framework import viewsets
-from rest_framework.authentication import TokenAuthentication
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.parsers import FileUploadParser,MultiPartParser
+from rest_framework import generics
 from django.http import HttpResponse
+from rest_framework.views import APIView
+from rest_framework.request import Request
+from django.contrib.auth.models import User
+from rest_framework.response import Response
+from rest_framework.parsers import FileUploadParser
+from .permissions import IsLoggedInUserOrAdmin, IsAdminUser
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated, AllowAny
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
-    # authentication_classes = (TokenAuthentication,)
-    # permission_classes = (IsAuthenticated,)
+    
+    def get_permissions(self):
+        permission_classes = []
+        if self.action == 'create':
+            permission_classes = [AllowAny]
+        elif self.action == 'retrieve' or self.action == 'update' or self.action == 'partial_update':
+            permission_classes = [IsLoggedInUserOrAdmin]
+        elif self.action == 'list' or self.action == 'destroy':
+            permission_classes = [IsAdminUser]
+        return [permission() for permission in permission_classes]
 
 class Allocate_Classes(APIView):
+    permission_classes = (IsAuthenticated,)
     def post(self, request, *args, **kwargs):
        Allocate = Allocate_class(
            Faculty_ID = User.objects.get(username = request.data['Faculty_ID']),
@@ -38,6 +47,7 @@ class Allocate_Classes(APIView):
        return HttpResponse("Class Allocated Successfully !!")
 
 class AddStudent(APIView):
+    permission_classes = (IsAuthenticated,)
     parser_class = (FileUploadParser,)
     def post(self, request, *args, **kwargs):
        Encode_Student = {}
@@ -58,6 +68,7 @@ class AddStudent(APIView):
 
 
 class AddAttendance(APIView):
+    permission_classes = (IsAuthenticated,)
     parser_class = (FileUploadParser,)
     def post(self, request, *args, **kwargs):
       list_of_students = {}
