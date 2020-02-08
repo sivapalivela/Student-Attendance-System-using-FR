@@ -1,0 +1,31 @@
+@import url(https://weloveiconfonts.com/api/?family=entypo|fontawesome);
+
+/* entypo */
+[class*="entypo-"]:before {
+  font-family: 'entypo', sans-serif;
+}
+
+/* fontawesome */
+[class*="fontawesome-"]:before {
+  font-family: 'FontAwesome', sans-serif;
+}
+
+.flex-spacer{
+    flex: 1 1 auto;
+}
+.menu{
+    width: 30%;
+    background-color: black;
+}
+
+.topbar{
+    padding-left: 1.5%;
+    padding-right: 1.5%;
+    padding-top: 1.5%;
+    padding-bottom: 1.5%;
+    background-color: whitesmoke;
+}
+
+.border-only{
+    border-radius: 10px;
+}

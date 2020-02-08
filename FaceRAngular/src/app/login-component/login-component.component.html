@@ -1,20 +1,28 @@
-<div class="Login">
+
+  <div class="Login">
     <div class="only-width">
     <div class="FLogin">
       <mat-card style="background-color: whitesmoke;">
         <div style="margin-bottom: 10%;"></div>
-        <mat-card-title class="Tophead">Faculty Login</mat-card-title>
+        <mat-card-title class="Tophead" style="color: blueviolet;">Faculty Login</mat-card-title>
         <mat-card-content class="content">
-          <form class="example-form">
+          <form class="example-form" [formGroup] = "loginForm" (ngSubmit) = "onSubmit()">
             <mat-form-field class="form-style">
-              <input [(ngModel)] = "input.username" matInput placeholder="User Name" [ngModelOptions]="{standalone: true}">
+              <input matInput placeholder="Faculty ID" type="text" id = "username" formControlName="username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }">
+              <div *ngIf="submitted && f.username.errors">
+                <div *ngIf="f.username.errors.required">Faculty ID is required</div>
+              </div>
             </mat-form-field>
           
             <mat-form-field class="form-style">
-              <input [(ngModel)] = "input.password" matInput placeholder="Password" [ngModelOptions]="{standalone: true}">
+              <input matInput placeholder="Password" type="password" id = "password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.username.errors }">
+              <div *ngIf="submitted && f.password.errors">
+                <div *ngIf="f.password.errors.required">Password is required</div>
+              </div>
             </mat-form-field>
+
+            <button [disabled] = "loading" mat-raised-button color="primary" class = "button-style">Login</button>
           </form>
-          <button (click) = "onLogin()" mat-raised-button color="primary" class = "button-style">Submit</button>
           <div style="margin-bottom: 10%;"></div>
         </mat-card-content>
       </mat-card>
@@ -23,7 +31,7 @@
     <div class="SLogin">
       <mat-card style="background-color: whitesmoke;">
         <div style="margin-bottom: 10%;"></div>
-        <mat-card-title class="Tophead">Student Login</mat-card-title>
+        <mat-card-title class="Tophead" style="color: blueviolet;">Student Login</mat-card-title>
         <mat-card-content class="content">
           <form class="example-form">
             <mat-form-field class="form-style">
@@ -33,8 +41,8 @@
             <mat-form-field class="form-style">
               <input matInput placeholder="Password">
             </mat-form-field>
+            <button mat-raised-button color="primary" class = "button-style">Login</button>
           </form>
-          <button mat-raised-button color="primary" class = "button-style">Submit</button>
           <div style="margin-bottom: 10%;"></div>
         </mat-card-content>
       </mat-card>

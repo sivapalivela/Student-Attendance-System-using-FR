@@ -1,0 +1,28 @@
+<div class = topbar>
+    <mat-toolbar color="primary" class="border-only"> 
+      Face Recognition SAP
+  
+      <span class="flex-spacer"></span>
+      <span>
+        <button mat-mini-fab color = "primary" [matMenuTriggerFor]="menu"><span class="fontawesome-th-list"></span></button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>Upload Attendance</button>
+        </mat-menu>
+      </span>
+      <span style="padding-right: 3%;"></span>
+  
+      <span>
+        <button mat-mini-fab color = "primary" [matMenuTriggerFor]="menu"><span class="entypo-user"></span></button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item style="font-weight: bold;letter-spacing: 3px;">
+            <span class="entypo-user" style="color: crimson;"></span> {{ this.setUser()}}
+          </button>
+          <button mat-menu-item style="font-weight: bold;letter-spacing: 3px;" (click)="onLogout()">
+            <span class="entypo-right-bold" style="color: crimson;"></span> Logout
+          </button>
+        </mat-menu>
+      </span>
+  
+      <span style="margin-right: 5%;"></span>
+    </mat-toolbar>
+  </div>

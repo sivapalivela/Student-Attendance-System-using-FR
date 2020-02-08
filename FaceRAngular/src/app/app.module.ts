@@ -1,24 +1,36 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import {MatCardModule} from '@angular/material/card';
-import {MatInputModule} from '@angular/material/input';
-import {MatButtonModule} from '@angular/material/button';
-import {MatMenuModule} from '@angular/material/menu';
-import { ReactiveFormsModule } from '@angular/forms';
 import 'hammerjs';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { AppComponent } from './app.component';
+import { JwtModule } from '@auth0/angular-jwt';
+import { AuthService } from './auth/auth.service';
+import { UserService } from '../app/user.service';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatCardModule } from '@angular/material/card';
+import { HttpClientModule } from '@angular/common/http';
+import { AppRoutingModule } from './app-routing.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatInputModule } from '@angular/material/input';
+import { BrowserModule } from '@angular/platform-browser';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { AuthGuardService } from './auth/auth-guard.service';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponentComponent } from './login-component/login-component.component';
+
+export function tokenGetter() {
+  return localStorage.getItem('token');
+}
+
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponentComponent
+    LoginComponentComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -33,9 +45,17 @@ import { LoginComponentComponent } from './login-component/login-component.compo
     MatInputModule,
     MatButtonModule,
     MatMenuModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSidenavModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        whitelistedDomains : ['localhost:4200'],
+        blacklistedRoutes : ['example.com/examplebadroute']
+      }
+    })
   ],
-  providers: [],
+  providers: [UserService, AuthGuardService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
