@@ -26,3 +26,47 @@
       <span style="margin-right: 5%;"></span>
     </mat-toolbar>
   </div>
+
+  <div style = "margin-bottom: 10%;"></div>
+  <div class="attend_div">
+    <mat-card>
+      <mat-card-title style="text-align: center;">Take Attendance</mat-card-title>
+      <mat-card-content>
+        <div style="text-align: center;font-size: larger;font-weight: bold;">{{this.setUser()}}</div>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+           <mat-form-field class="exform">
+            <mat-label>Branch - Year of Study - Semester</mat-label>
+            <mat-select (selectionChange)="onBr($event)">
+              <mat-option *ngFor="let br of br_opt" [value]="br">
+                {{br}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="exform">
+            <mat-label>Section</mat-label>
+            <mat-select (selectionChange)="onSe($event)">
+              <mat-option *ngFor="let se of se_opt" [value]="se">
+                {{se}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="exform">
+            <mat-label>Period</mat-label>
+            <mat-select (selectionChange)="onPe($event)">
+              <mat-option *ngFor="let pe of pe_opt" [value]="pe">
+                {{pe}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+         <div>
+            <span>Video File</span>
+            <input type="file" name="Video" (change)="onChange($event)" />
+         </div>
+         <button mat-raised-button color="primary" type="submit">Upload</button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>

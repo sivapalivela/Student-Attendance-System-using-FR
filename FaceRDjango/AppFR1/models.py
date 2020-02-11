@@ -71,6 +71,7 @@ class Attendance(models.Model):
     Section = models.ForeignKey(Section, on_delete=models.CASCADE)
     Period = models.ForeignKey(Period, on_delete=models.CASCADE)
     Faculty_ID = models.ForeignKey(User,on_delete=models.CASCADE)
+    Video = models.FileField()
     Date = models.DateField(auto_now_add=True)
     Time = models.TimeField(auto_now_add=True)
     Attendance = JSONField(default = "")

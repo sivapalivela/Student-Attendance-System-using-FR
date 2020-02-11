@@ -29,3 +29,14 @@
 .border-only{
     border-radius: 10px;
 }
+
+.attend_div{
+  width: 25%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.exform{
+  width: 100%;
+  display: block;
+}

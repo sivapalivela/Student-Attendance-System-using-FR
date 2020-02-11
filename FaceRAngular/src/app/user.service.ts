@@ -9,6 +9,7 @@ import { catchError } from 'rxjs/operators';
 export class UserService {
 
   userset = false;
+  DJANGO_SERVER: string = "http://127.0.0.1:8000/appfr1/api/students/take_attendance";
   login_url = 'http://127.0.0.1:8000/api/login/';
   private options = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
 
@@ -31,5 +32,9 @@ export class UserService {
       .pipe(
         catchError(this.handleError)
       );
+  }
+
+  upload(formData) {
+    return this.http.post<any>(`${this.DJANGO_SERVER}`, formData);
   }
 }

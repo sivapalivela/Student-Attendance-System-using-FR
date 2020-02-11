@@ -12,3 +12,8 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     def create(self,validated_data):
         user = User.objects.create_user(**validated_data)
         return user
+
+class AllocateClass(serializers.ModelSerializer):
+    class Meta:
+        model = Allocate_class
+        fields = '__all__'
