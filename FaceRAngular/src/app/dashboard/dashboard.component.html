@@ -1,7 +1,6 @@
 <div class = topbar>
     <mat-toolbar color="primary" class="border-only"> 
       Face Recognition SAP
-  
       <span class="flex-spacer"></span>
       <span>
         <button mat-mini-fab color = "primary" [matMenuTriggerFor]="menu"><span class="fontawesome-th-list"></span></button>
@@ -27,12 +26,16 @@
     </mat-toolbar>
   </div>
 
-  <div style = "margin-bottom: 10%;"></div>
+  <div style = "margin-bottom: 7%;"></div>
   <div class="attend_div">
     <mat-card>
-      <mat-card-title style="text-align: center;">Take Attendance</mat-card-title>
+      <div style="margin-top: 5%;"></div>
+      <mat-card-title class="cardtitle">
+        <span class="entypo-camera" style="color: blueviolet;"></span> Take Attendance
+      </mat-card-title>
+      <div style="width: 50%;border: 1px solid blueviolet;margin-left: auto;margin-right: auto;;margin-bottom: 10%;"></div>
       <mat-card-content>
-        <div style="text-align: center;font-size: larger;font-weight: bold;">{{this.setUser()}}</div>
+        <div class="exform" style="font-size: large;"><span style="font-weight: 600;">Faculty ID : </span><span style="color: crimson;letter-spacing: 2px;font-weight: 600;">{{this.setUser()}}</span></div>
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
            <mat-form-field class="exform">
             <mat-label>Branch - Year of Study - Semester</mat-label>
@@ -61,11 +64,14 @@
             </mat-select>
           </mat-form-field>
 
-         <div>
-            <span>Video File</span>
+         <div class="exform">
+            <div style="font-size: medium;margin-bottom: 2%;color: rgb(55, 61, 66);">Video File</div>
             <input type="file" name="Video" (change)="onChange($event)" />
          </div>
-         <button mat-raised-button color="primary" type="submit">Upload</button>
+         <div style="margin-bottom: 7.5%;"></div>
+         <span style="margin-left: 40%;"></span>
+         <button mat-raised-button color="primary" type="submit" class="buton">Upload</button>
+         <div style="margin-bottom: 5%;"></div>
         </form>
       </mat-card-content>
     </mat-card>

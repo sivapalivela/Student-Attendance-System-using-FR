@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ComponentFactoryResolver } from '@angular/core';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -64,19 +64,20 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   onBr(event) {
     let temp_Br = event.value;
     let new_Br = temp_Br.split(' ');
-    this.form.get('Branch').setValue(new_Br[0]);
-    this.form.get('Studying_Year').setValue(new_Br[1]);
-    this.form.get('Semester').setValue(new_Br[3]);
+    this.form.get('Branch').setValue(new_Br[2]);
+    this.form.get('Studying_Year').setValue(new_Br[7]);
+    this.form.get('Semester').setValue(new_Br[11]);
   }
 
   get_data(teacher) {
     this.http.get('http://127.0.0.1:8000/appfr1/api/students/getallocatedclass?user=' + teacher).subscribe(data => {
       // tslint:disable-next-line: forin
       for (const ob in data) {
-        let val = data[ob];
+        const val = data[ob];
         this.se_opt.push(val['Allocated_Section']);
         this.pe_opt.push(val['Allocated_Period']);
-        let varible = 'Branch - ' + val['Allocated_Branch'] + ' , Studying Year - ' + val['Allocate_Studying_Year'] + ' Semester - ' + val['Allocated_Semester'];
+        // tslint:disable-next-line: max-line-length
+        const varible = 'Branch - ' + val['Allocated_Branch'] + ' , Studying Year - ' + val['Allocate_Studying_Year'] + ' , Semester - ' + val['Allocated_Semester'];
         this.br_opt.push(varible);
       }
     });
@@ -90,7 +91,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     formData.append('Period', this.form.get('Period').value);
     formData.append('Section', this.form.get('Section').value);
     formData.append('Semester', this.form.get('Semester').value);
-    formData.append('Faculty_ID',this.facultyname);
+    formData.append('Faculty_ID', this.facultyname);
     this.user.upload(formData).subscribe(
       (res) => {
         console.log(res);
@@ -100,8 +101,6 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       }
     );
   }
-
-
 
   public onLogout() {
     localStorage.setItem('username', '');

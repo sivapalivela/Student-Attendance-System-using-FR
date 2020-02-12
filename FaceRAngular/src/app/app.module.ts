@@ -13,6 +13,7 @@ import { AppRoutingModule } from './app-routing.module';
 import {MatSelectModule} from '@angular/material/select';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatInputModule } from '@angular/material/input';
+import {MatDividerModule} from '@angular/material/divider';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -49,6 +50,7 @@ export function tokenGetter() {
     ReactiveFormsModule,
     MatSidenavModule,
     MatSelectModule,
+    MatDividerModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,

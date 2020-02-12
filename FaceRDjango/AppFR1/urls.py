@@ -9,7 +9,6 @@ urlpatterns = [
     path('api/students/add_student',views.AddStudent.as_view()),
     path('api/students/take_attendance',views.AddAttendance.as_view()),
     path('api/students/add_class',views.Allocate_Classes.as_view()),
-    path('api/students/mlcall',views.Evaluate),
     path('api/students/getallocatedclass',views.GetAllocatedClasses.as_view())
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

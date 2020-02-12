@@ -1,23 +1,27 @@
 
   <div class="Login">
+    <div class="justlayer">
     <div class="only-width">
     <div class="FLogin">
-      <mat-card style="background-color: whitesmoke;">
+      <mat-card>
         <div style="margin-bottom: 10%;"></div>
-        <mat-card-title class="Tophead" style="color: blueviolet;">Faculty Login</mat-card-title>
+        <mat-card-title class="Tophead" style="color: blueviolet;">
+          <span class="entypo-users" style="color: blueviolet;"></span> Faculty Login
+        </mat-card-title>
+        <div style="width: 30%;border: 1px solid blueviolet;margin-left: auto;margin-right: auto;;margin-bottom: 5%;"></div>
         <mat-card-content class="content">
           <form class="example-form" [formGroup] = "loginForm" (ngSubmit) = "onSubmit()">
             <mat-form-field class="form-style">
               <input matInput placeholder="Faculty ID" type="text" id = "username" formControlName="username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }">
               <div *ngIf="submitted && f.username.errors">
-                <div *ngIf="f.username.errors.required">Faculty ID is required</div>
+                <div *ngIf="f.username.errors.required" style="color: red;">Faculty ID is required</div>
               </div>
             </mat-form-field>
           
             <mat-form-field class="form-style">
               <input matInput placeholder="Password" type="password" id = "password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.username.errors }">
               <div *ngIf="submitted && f.password.errors">
-                <div *ngIf="f.password.errors.required">Password is required</div>
+                <div *ngIf="f.password.errors.required" style="color: red;">Password is required</div>
               </div>
             </mat-form-field>
 
@@ -29,9 +33,12 @@
     </div>
   
     <div class="SLogin">
-      <mat-card style="background-color: whitesmoke;">
+      <mat-card>
         <div style="margin-bottom: 10%;"></div>
-        <mat-card-title class="Tophead" style="color: blueviolet;">Student Login</mat-card-title>
+        <mat-card-title class="Tophead" style="color: blueviolet;">
+          <span class="fontawesome-user" style="color: blueviolet;"></span> Student Login
+        </mat-card-title>
+        <div style="width: 30%;border: 1px solid blueviolet;margin-left: auto;margin-right: auto;margin-bottom: 5%;"></div>
         <mat-card-content class="content">
           <form class="example-form">
             <mat-form-field class="form-style">
@@ -46,6 +53,7 @@
           <div style="margin-bottom: 10%;"></div>
         </mat-card-content>
       </mat-card>
+    </div>
     </div>
     </div>
   </div>

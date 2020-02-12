@@ -85,6 +85,7 @@ class AddAttendance(APIView):
           Video = Attendance_Video
       )
       Attended.save()
+      return HttpResponse("Attendance Uploaded")
       return HttpResponse(list_of_students)
 
 class GetAllocatedClasses(generics.ListAPIView):
@@ -96,7 +97,3 @@ class GetAllocatedClasses(generics.ListAPIView):
             usname = User.objects.filter(username = user_name)
             queryset = queryset.filter(Faculty_ID = usname[0].id) 
         return queryset
-    
-def Evaluate(request):
-    VideoToFrame("3._S01.1-L03--Format_of_Recursion_Method.mp4")
-    return HttpResponse("Successful")
