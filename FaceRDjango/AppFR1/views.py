@@ -1,4 +1,5 @@
 import numpy as np
+from media.ML import *
 from .models import *
 import face_recognition
 from .serializers import *
@@ -16,7 +17,6 @@ from rest_framework.parsers import FileUploadParser
 from .permissions import IsLoggedInUserOrAdmin, IsAdminUser
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated, AllowAny
-from media.ML import *
 import cv2
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all().order_by('-date_joined')
@@ -44,16 +44,17 @@ class Allocate_Classes(APIView):
            Day_of_Week = request.data['Day']
        )
        Allocate.save()
-       return HttpResponse("Class Allocated Successfully !!")
+       return HttpResponse("Class Allocated Successfully for "+ str(request.data['Faculty_ID']) +" !!")
 
 class AddStudent(APIView):
     parser_class = (FileUploadParser,)
     def post(self, request, *args, **kwargs):
        Encode_Student = {}
        Student_Image = request.data['Image']
-
-       # code for converting image to encoding and then adding to dictionary "Encode_Student"
-
+       image = face_recognition.load_image_file(Student_Image)
+       biden_encoding = face_recognition.face_encodings(image)[0]
+       biden_encoding2 = biden_encoding.tolist()
+       Encode_Student[request.data['Roll_number']] = biden_encoding2
        ADD_Student = Student(
           Roll_Number = request.data['Roll_number'],
           Studying_Year = StudyingYear(Studying_Year=request.data['Studying_Year']),
@@ -63,7 +64,7 @@ class AddStudent(APIView):
           Encoding = Encode_Student
        )
        ADD_Student.save()
-       return HttpResponse("Student Added Succesfully with Roll Number" + str(request.data['Roll_number']) +" !!")
+       return HttpResponse("Student Added Succesfully with Roll Number " + str(request.data['Roll_number']) +" !!")
 
 
 class AddAttendance(APIView):
@@ -73,13 +74,20 @@ class AddAttendance(APIView):
       Attendance_Video = request.data['file']
 
       # code for dividing video into frames and then add present student numbers to dictionary "list_of_students"
+      year = request.data['Studying_Year']
+      sem = request.data['Semester']
+      branch = request.data['Branch']
+      sec = request.data['Section']
+      per = request.data['Period']
+
+      list_of_students = getClassEncodings(year,sem,branch,sec)
 
       Attended = Attendance(
-          Studying_Year = StudyingYear(Studying_Year = request.data['Studying_Year']),
-          Semester = Semester(Semester = request.data['Semester']),
-          Branch = Branche(Branch = request.data['Branch']),
-          Section = Section(Section = request.data['Section']),
-          Period = Period(Period = request.data['Period']),
+          Studying_Year = StudyingYear(Studying_Year = year),
+          Semester = Semester(Semester = sem),
+          Branch = Branche(Branch = branch),
+          Section = Section(Section = sec),
+          Period = Period(Period = per),
           Faculty_ID = User.objects.get(username = request.data['Faculty_ID']),
           Attendance = list_of_students ,
           Video = Attendance_Video

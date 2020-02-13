@@ -1,6 +1,7 @@
-import face_recognition
 import os
 import cv2
+import face_recognition
+from AppFR1.models import *
 
 # Load Images from the folder
 
@@ -36,9 +37,15 @@ def VideoToFrame(video_path):
         sec = round(sec, 2)
         success = getFrame(sec)
 
-def getClassEncodings():
+def getClassEncodings(year,sem,branch,sec):
+    yr = StudyingYear.objects.filter(Studying_Year = year)
+    seme = Semester.objects.filter(Semester = sem)
+    br = Branche.objects.filter(Branch = branch)
+    sc = Section.objects.filter(Section = sec) 
+    queryset = Student.objects.filter(Studying_Year__in = yr, Branch__in = br,Semester__in = seme,Section__in = sc)
+    return {}
     # TODO : get data from table contains each encoding of the student
-    pass
+    
     
 
 def getAttendance():
