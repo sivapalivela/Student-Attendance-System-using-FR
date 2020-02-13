@@ -72,7 +72,8 @@ class AddAttendance(APIView):
     def post(self, request, *args, **kwargs):
       list_of_students = {}
       Attendance_Video = request.data['file']
-
+      Vid = Video(Video=Attendance_Video)
+      Vid.save()
       # code for dividing video into frames and then add present student numbers to dictionary "list_of_students"
       year = request.data['Studying_Year']
       sem = request.data['Semester']
@@ -80,7 +81,7 @@ class AddAttendance(APIView):
       sec = request.data['Section']
       per = request.data['Period']
 
-      list_of_students = getClassEncodings(year,sem,branch,sec)
+      list_of_students = getAttendance(year,sem,branch,sec,str(Vid))
 
       Attended = Attendance(
           Studying_Year = StudyingYear(Studying_Year = year),
@@ -89,12 +90,11 @@ class AddAttendance(APIView):
           Section = Section(Section = sec),
           Period = Period(Period = per),
           Faculty_ID = User.objects.get(username = request.data['Faculty_ID']),
-          Attendance = list_of_students ,
-          Video = Attendance_Video
+          Attendance = list_of_students 
       )
       Attended.save()
       return HttpResponse("Attendance Uploaded")
-      return HttpResponse(list_of_students)
+    #   return HttpResponse(list_of_students)
 
 class GetAllocatedClasses(generics.ListAPIView):
     serializer_class = AllocateClass

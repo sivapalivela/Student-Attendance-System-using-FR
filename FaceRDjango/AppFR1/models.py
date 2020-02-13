@@ -64,6 +64,11 @@ class Allocate_class(models.Model):
     def __str__(self):
         return str(self.Faculty_ID)
 
+class Video(models.Model):
+    Video = models.FileField()
+    def __str__(self):
+        return str(self.Video)
+    
 class Attendance(models.Model):
     Studying_Year = models.ForeignKey(StudyingYear,on_delete=models.CASCADE)
     Semester = models.ForeignKey(Semester,on_delete=models.CASCADE)
@@ -71,7 +76,6 @@ class Attendance(models.Model):
     Section = models.ForeignKey(Section, on_delete=models.CASCADE)
     Period = models.ForeignKey(Period, on_delete=models.CASCADE)
     Faculty_ID = models.ForeignKey(User,on_delete=models.CASCADE)
-    Video = models.FileField()
     Date = models.DateField(auto_now_add=True)
     Time = models.TimeField(auto_now_add=True)
     Attendance = JSONField(default = "")
