@@ -18,6 +18,7 @@ from .permissions import IsLoggedInUserOrAdmin, IsAdminUser
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated, AllowAny
 import cv2
+import json
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
@@ -74,7 +75,7 @@ class AddAttendance(APIView):
       Attendance_Video = request.data['file']
       Vid = Video(Video=Attendance_Video)
       Vid.save()
-      # code for dividing video into frames and then add present student numbers to dictionary "list_of_students"
+      
       year = request.data['Studying_Year']
       sem = request.data['Semester']
       branch = request.data['Branch']
@@ -93,8 +94,8 @@ class AddAttendance(APIView):
           Attendance = list_of_students 
       )
       Attended.save()
-      return HttpResponse("Attendance Uploaded")
-    #   return HttpResponse(list_of_students)
+      dic = json.dumps(list_of_students)
+      return HttpResponse(dic)
 
 class GetAllocatedClasses(generics.ListAPIView):
     serializer_class = AllocateClass

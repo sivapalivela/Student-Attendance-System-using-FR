@@ -14,10 +14,14 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
 
   facultyname: string;
+  displayedColumns: string[] = ['Roll Number', 'Status'];
+  datasource = [];
 
   br_opt : Array<string> = [];
   se_opt : Array<string> = [];
   pe_opt : Array<string> = [];
+  PRESENT_LIST = false;
+  MAIN_COMP = true;
 
   form: FormGroup;
   response;
@@ -92,14 +96,27 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     formData.append('Section', this.form.get('Section').value);
     formData.append('Semester', this.form.get('Semester').value);
     formData.append('Faculty_ID', this.facultyname);
+    this.MAIN_COMP = false;
     this.user.upload(formData).subscribe(
       (res) => {
-        console.log(res);
+        this.PRESENT_LIST = true;
+        this.MAIN_COMP = true;
+        // tslint:disable-next-line: forin
+        for (const i in res) {
+          this.datasource.push(i);
+        }
+        console.log(this.datasource);
       },
       (err) => {
-        console.log(err);
+        alert(err);
       }
     );
+  }
+  public display() {
+    if (this.PRESENT_LIST === false && this.MAIN_COMP === false) {
+      return true;
+    }
+    return false;
   }
 
   public onLogout() {
