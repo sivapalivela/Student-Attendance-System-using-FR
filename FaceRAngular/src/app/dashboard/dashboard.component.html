@@ -5,7 +5,7 @@
     <span>
       <button mat-mini-fab color = "primary" [matMenuTriggerFor]="uploadmenu"><span class="fontawesome-th-list"></span></button>
       <mat-menu #uploadmenu="matMenu">
-        <button mat-menu-item>View My Profile</button>
+        <button mat-menu-item>Update My Profile</button>
         <button mat-menu-item>View Allocated Classes</button>
         <button mat-menu-item>Display Student's Attendance</button>
         <button mat-menu-item>Check Lectures taken for a Class</button>
@@ -19,7 +19,7 @@
     <span>
       <button mat-mini-fab color = "primary" [matMenuTriggerFor]="menu"><span class="entypo-user"></span></button>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item style="font-weight: bold;letter-spacing: 3px;">
+        <button mat-menu-item style="font-weight: bold;letter-spacing: 3px;" (click) = "openprofile()">
           <span class="entypo-user" style="color: crimson;"></span> {{ this.setUser()}}
         </button>
         <button mat-menu-item style="font-weight: bold;letter-spacing: 3px;" (click)="onLogout()">
@@ -32,69 +32,5 @@
   </mat-toolbar>
 </div>
 
-<div style = "margin-bottom: 7%;"></div>
-<div class="attend_div">
-  <mat-card>
-    <div style="margin-top: 5%;"></div>
-    <mat-card-title class="cardtitle">
-      <span class="entypo-camera" style="color: blue;"></span> Take Attendance
-    </mat-card-title>
-    <div style="width: 50%;border: 1px solid blueviolet;margin-left: auto;margin-right: auto;;margin-bottom: 10%;"></div>
-    <mat-card-content>
-      <div class="exform" style="font-size: large;"><span style="font-weight: 600;">Faculty ID : </span><span style="color: crimson;letter-spacing: 2px;font-weight: 600;">{{this.setUser()}}</span></div>
-      <form [formGroup]="form" (ngSubmit)="onSubmit()">
-         <mat-form-field class="exform">
-          <mat-label>Branch - Year of Study - Semester</mat-label>
-          <mat-select (selectionChange)="onBr($event)">
-            <mat-option *ngFor="let br of br_opt" [value]="br">
-              {{br}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+<app-attendance></app-attendance>
 
-        <mat-form-field class="exform">
-          <mat-label>Section</mat-label>
-          <mat-select (selectionChange)="onSe($event)">
-            <mat-option *ngFor="let se of se_opt" [value]="se">
-              {{se}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <mat-form-field class="exform">
-          <mat-label>Period</mat-label>
-          <mat-select (selectionChange)="onPe($event)">
-            <mat-option *ngFor="let pe of pe_opt" [value]="pe">
-              {{pe}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-
-       <div class="exform">
-          <div style="font-size: medium;margin-bottom: 2%;color: rgb(55, 61, 66);">Video File</div>
-          <input type="file" name="Video" (change)="onChange($event)" />
-       </div>
-       <div style="margin-bottom: 7.5%;"></div>
-       <span style="margin-left: 40%;"></span>
-       <button mat-raised-button color="primary" type="submit" class="buton">Upload</button>
-       <div style="margin-bottom: 5%;"></div>
-      </form>
-    </mat-card-content>
-  </mat-card>
-</div>
-
-<div *ngIf="display()" style="width:5%;margin-left: auto;margin-right: auto;"><mat-spinner></mat-spinner></div>
-<div *ngIf = "PRESENT_LIST " class = "fortable">
-<table id = "customers">
-    <thead>
-      <th>Roll Number</th>
-      <th>Status</th>
-    </thead>
-    <tbody>
-      <tr *ngFor = "let fr of datasource">
-        <td>{{fr}}</td>
-        <td>True</td>
-      </tr>
-    </tbody>
-</table>
-</div>

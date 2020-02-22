@@ -15,6 +15,9 @@ export class LoginComponentComponent implements OnInit {
   submitted = false;
   returnUrl: string;
 
+  studenton = false;
+  facultyon = true;
+
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -59,5 +62,10 @@ export class LoginComponentComponent implements OnInit {
       }
     );
 
+  }
+
+  public openStudent() {
+    this.studenton = !this.studenton;
+    this.facultyon = !this.facultyon;
   }
 }

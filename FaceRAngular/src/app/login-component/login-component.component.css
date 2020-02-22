@@ -10,10 +10,6 @@
 [class*="fontawesome-"]:before {
   font-family: 'FontAwesome', sans-serif;
 }
-  .Tophead{
-    text-align: center;
-    margin-bottom: 3%;
-  }
   .example-form{
     width: 100%;
   }
@@ -23,32 +19,8 @@
     margin-bottom: 10%;
   }
   
-  .SLogin,.FLogin{
-    margin-top: 20%;
-    width: 45%;
-  }
-  
-  .FLogin{
-    float: left;
-  }
-  .SLogin{
-    float: right;
-  }
-  
   .content{
     text-align: center;
-  }
-  .only-width{
-    width: 60%;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  .Login{
-    width: 100%;
-    height: 100%;
-    background-image: url('https://images.wallpaperscraft.com/image/headphones_books_education_121501_2560x1440.jpg');
-    position: relative;
   }
 
   .button-style{
@@ -56,6 +28,18 @@
     width: 20%;
     margin-left: auto;
     margin-right: auto;
+    float: right;
+  }
+
+  .button-style2{
+    float: left;
+  }
+/*-------------------*/
+  .Login{
+    width: 100%;
+    height: 100%;
+    background-image: url('https://images.wallpaperscraft.com/image/headphones_books_education_121501_2560x1440.jpg');
+    position: relative;
   }
 
   .justlayer{
@@ -65,4 +49,27 @@
     left: 0;
     width: 100%;
     height: 100%;
+  }
+
+  .only-width{
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .SLogin,.FLogin{
+    margin-top: 35%;
+  }
+
+  .Tophead{
+    text-align: center;
+    margin-bottom: 3%;
+  }
+
+  .spacediv{
+    width: 30%;
+    border: 1px solid blueviolet;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5%;
   }

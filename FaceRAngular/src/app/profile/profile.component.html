@@ -1,0 +1,95 @@
+<div class="topdiv">
+    <mat-card class="mtcard">
+        <div fxLayout="row">
+            <div fxFlex fxLayoutAlign="center">
+                <img src="{{this.PROFILE_PICTURE}}" class="propic"/>
+            </div>
+            <div fxFlex fxLayoutAlign="start">
+                <div class="detaildiv">
+                    <h2>{{this.Name}}</h2>
+                    <h4 class="fontst"><span class="entypo-graduation-cap" style="font-size: larger;color: rgba(0, 0, 0, 0.897);"></span> &nbsp;&nbsp; {{this.Position}}</h4>
+
+                    <h4 class="fontst"><span class="entypo-mail" style="font-size: larger;color: black;"></span> &nbsp;&nbsp; {{this.Email}}</h4>
+
+                    <h4 class="fontst"><span class="entypo-location" style="font-size: larger;color: black;"></span> &nbsp;&nbsp; {{this.Location}}</h4>
+                </div>
+            </div>
+            <div fxFlex>
+                    <div style="margin-top: 10%;">
+                        <a href="{{this.Facebook}}" style="text-decoration: none;"><span class="entypo-facebook-squared" style="font-weight:bold;font-size: larger;color:#3b5998;padding-right: 15%;"> Facebook</span></a>
+
+                        <a href="{{this.Twitter}}" style="text-decoration: none;"><span class="entypo-twitter" style="font-weight:bold;font-size: larger;color: #00acee;"> Twitter</span></a>
+                        <div style="margin-bottom: 2%;"></div>
+                        <br>
+                        <a href="{{this.Linkedin}}" style="text-decoration: none;"><span class="entypo-linkedin" style="font-weight:bold;font-size: larger;color:#0e76a8;padding-right: 18%;"> Linkedin</span></a>
+
+                        <a href="{{this.Github}}" style="text-decoration: none;"><span class="entypo-github" style="font-weight:bold;font-size: larger;color: #333;"> Github</span></a>
+                        <div style="margin-bottom: 2%;"></div>
+                        <br>
+                        <a href="{{this.Stackoverflow}}" style="text-decoration: none;"><span class="entypo-drive" style="font-weight:bold;font-size: larger;color: #ef8236;"> Stack Overflow</span></a>
+                    </div>
+            </div>
+        </div>
+    </mat-card>
+
+    <mat-card class="mtcard" style="margin-top: 0%;background-color: white;margin-bottom: 5%;">
+        <div>
+            <mat-tab-group mat-stretch-tabs>
+                <mat-tab label="Bio">
+                    <div class="general">
+                        <h3>About Me</h3>
+                        <p style="font-weight: bold;font-style: italic;">{{this.Bio}}</p>
+                    </div>
+                </mat-tab>
+
+                <mat-tab label="Education & Achievements">
+                    <div class="general">
+                        <h3>Education</h3>
+                        <ul>
+                            <li *ngFor="let edu of this.Education">{{edu}}</li>
+                        </ul>
+                    </div>
+                    <div class="general">
+                        <h3>Achievements</h3>
+                        <ul>
+                            <li *ngFor="let ach of this.Achievement">{{ach}}</li>
+                        </ul>
+                    </div>
+                </mat-tab>
+
+                <mat-tab label="About">
+                    <div class="general">
+                        <p class="bord">Faculty ID : {{this.username}}</p>
+                        <p class="bord">College : Vishnu Institute of Technology</p>
+                        <p class="bord">First Name : {{this.FirstName}}</p>
+                        <p class="bord">Last Name : {{this.LastName}}</p>
+                        <p class="bord">Department : {{this.BelongingDept}}</p>
+                        <p class="bord">Gender : {{this.Gender}}</p>
+                        <p class="bord">Date of Birth : {{this.DoB}}</p>
+                        <p class="bord">Current Town : {{this.Location}}</p>
+                        <p class="bord">Mobile Number : {{this.Mobile}}</p>
+                        <p class="bord">Country : India</p>
+                        <div>
+                            <p>Languages</p>
+                            <ul>
+                                <li *ngFor="let lang of this.Languages">{{lang}}</li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </mat-tab>
+                <mat-tab label="Skills">
+                    <div class="general">
+                        <h3>Skills</h3>
+                        <ul>
+                            <li *ngFor="let sk of this.Skills">{{sk}}</li>
+                        </ul>
+                    </div>
+                </mat-tab>
+              </mat-tab-group>
+        </div> 
+        <div style="text-align: center;">     
+            <button mat-raised-button color="primary" (click)="closeit()">Close</button>
+        </div>
+    </mat-card>
+</div>

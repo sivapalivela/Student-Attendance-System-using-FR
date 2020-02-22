@@ -1,0 +1,50 @@
+<div style = "margin-bottom: 7%;"></div>
+<div class="attend_div">
+  <mat-card>
+    <div style="margin-top: 5%;"></div>
+    <mat-card-title class="cardtitle">
+      <span class="entypo-camera" style="color: blue;"></span> Take Attendance
+    </mat-card-title>
+    <div style="width: 50%;border: 1px solid blueviolet;margin-left: auto;margin-right: auto;;margin-bottom: 10%;"></div>
+    <mat-card-content>
+      <div class="exform" style="font-size: large;"><span style="font-weight: 600;">Faculty ID : </span><span style="color: crimson;letter-spacing: 2px;font-weight: 600;">{{this.setUser()}}</span></div>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+         <mat-form-field class="exform">
+          <mat-label>Branch - Year of Study - Semester - Section - Period - Day</mat-label>
+          <mat-select (selectionChange)="onAll($event)">
+            <mat-option *ngFor="let all of ALL_OPT" [value]="all">
+              {{all}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+       <div class="exform">
+          <div style="font-size: medium;margin-bottom: 2%;color: rgb(55, 61, 66);">Video File</div>
+          <input type="file" name="Video" (change)="onChange($event)" />
+       </div>
+       <div style="margin-bottom: 7.5%;"></div>
+       <span style="margin-left: 40%;"></span>
+       <button mat-raised-button color="primary" type="submit" class="buton">Upload</button>
+       <div style="margin-bottom: 5%;"></div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<div *ngIf="display()" style="width:5%;margin-left: auto;margin-right: auto;"><mat-spinner></mat-spinner></div>
+<div *ngIf = "PRESENT_LIST " class = "fortable">
+<table id = "customers">
+    <thead>
+      <th>Roll Number</th>
+      <th>Status</th>
+    </thead>
+    <tbody>
+      <tr *ngFor = "let fr of datasource">
+        <td>{{fr}}</td>
+        <td>Present</td>
+      </tr>
+    </tbody>
+</table>
+</div>
+

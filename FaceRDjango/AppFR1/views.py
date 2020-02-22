@@ -19,6 +19,7 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated, AllowAny
 import cv2
 import json
+
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
@@ -105,4 +106,22 @@ class GetAllocatedClasses(generics.ListAPIView):
         if user_name is not None:
             usname = User.objects.filter(username = user_name)
             queryset = queryset.filter(Faculty_ID = usname[0].id) 
+        return queryset
+
+class GetProfile(generics.ListAPIView):
+    serializer_class = Get_Profile
+    def get_queryset(self):
+        queryset = Profile.objects.all()
+        user_name = self.request.query_params.get('user', None)
+        if user_name is not None:
+            usname = User.objects.filter(username = user_name)
+            queryset = queryset.filter(Id = usname[0].id)
+        return queryset 
+
+class GetUser(generics.ListAPIView):
+    serializer_class = UserSerializer
+    def get_queryset(self):
+        user_name = self.request.query_params.get('user', None)
+        if user_name is not None:
+            queryset = User.objects.filter(username = user_name)
         return queryset

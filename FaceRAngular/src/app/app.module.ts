@@ -25,6 +25,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponentComponent } from './login-component/login-component.component';
+import { ProfileComponent } from './profile/profile.component';
+import { AttendanceComponent } from './attendance/attendance.component';
+import {MatTabsModule} from '@angular/material/tabs';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -34,7 +37,9 @@ export function tokenGetter() {
   declarations: [
     AppComponent,
     LoginComponentComponent,
-    DashboardComponent
+    DashboardComponent,
+    ProfileComponent,
+    AttendanceComponent
   ],
   imports: [
     BrowserModule,
@@ -54,6 +59,7 @@ export function tokenGetter() {
     MatSelectModule,
     MatDividerModule,
     MatTableModule,
+    MatTabsModule,
     MatProgressSpinnerModule,
     JwtModule.forRoot({
       config: {
