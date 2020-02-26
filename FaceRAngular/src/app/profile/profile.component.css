@@ -54,3 +54,11 @@
     margin-right: auto;
     padding-bottom: 1.5%;
 }
+
+.bord2{
+    border-bottom: 3px solid #333;
+    width: 10%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 1.5%;
+}

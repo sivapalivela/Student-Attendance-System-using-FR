@@ -59,14 +59,6 @@ export class AttendanceComponent implements OnInit, AfterViewInit {
 
   get_data(teacher) {
     this.http.get('http://127.0.0.1:8000/appfr1/api/students/getallocatedclass?user=' + teacher).subscribe(data => {
-      // for (const ob in data) {
-      //   const val = data[ob];
-      //   this.se_opt.push(val['Allocated_Section']);
-      //   this.pe_opt.push(val['Allocated_Period']);
-      //   // tslint:disable-next-line: max-line-length
-      //   const varible = 'Branch - ' + val['Allocated_Branch'] + ' , Studying Year - ' + val['Allocate_Studying_Year'] + ' , Semester - ' + val['Allocated_Semester'];
-      //   this.br_opt.push(varible);
-      // }
       // tslint:disable-next-line: forin
       for (const ob in data) {
         const val = data[ob];

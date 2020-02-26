@@ -10,6 +10,7 @@ export class UserService {
 
   userset = false;
   DJANGO_SERVER = 'http://127.0.0.1:8000/appfr1/api/students/take_attendance';
+  DJANGO_SERVER2 = 'http://127.0.0.1:8000/appfr1/api/students/add_student';
   LOGIN_URL = 'http://127.0.0.1:8000/api/login/';
   private options = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
 
@@ -36,5 +37,9 @@ export class UserService {
 
   upload(formData) {
     return this.http.post<any>(`${this.DJANGO_SERVER}`, formData);
+  }
+
+  upload2(formData) {
+    return this.http.post<any>(`${this.DJANGO_SERVER2}`, formData);
   }
 }

@@ -28,6 +28,9 @@ import { LoginComponentComponent } from './login-component/login-component.compo
 import { ProfileComponent } from './profile/profile.component';
 import { AttendanceComponent } from './attendance/attendance.component';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
+import { AddstudentComponent } from './addstudent/addstudent.component';
+import { ProfiledialogComponent } from './profiledialog/profiledialog.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -39,7 +42,9 @@ export function tokenGetter() {
     LoginComponentComponent,
     DashboardComponent,
     ProfileComponent,
-    AttendanceComponent
+    AttendanceComponent,
+    AddstudentComponent,
+    ProfiledialogComponent
   ],
   imports: [
     BrowserModule,
@@ -61,6 +66,7 @@ export function tokenGetter() {
     MatTableModule,
     MatTabsModule,
     MatProgressSpinnerModule,
+    MatDialogModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
@@ -68,6 +74,10 @@ export function tokenGetter() {
         blacklistedRoutes : ['example.com/examplebadroute']
       }
     })
+  ],
+  entryComponents: [
+    AddstudentComponent,
+    ProfiledialogComponent
   ],
   providers: [UserService, AuthGuardService, AuthService],
   bootstrap: [AppComponent]

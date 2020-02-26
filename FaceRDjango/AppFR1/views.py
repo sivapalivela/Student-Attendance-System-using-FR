@@ -52,21 +52,22 @@ class AddStudent(APIView):
     parser_class = (FileUploadParser,)
     def post(self, request, *args, **kwargs):
        Encode_Student = {}
-       Student_Image = request.data['Image']
+       Student_Image = request.data['file']
        image = face_recognition.load_image_file(Student_Image)
        biden_encoding = face_recognition.face_encodings(image)[0]
        biden_encoding2 = biden_encoding.tolist()
-       Encode_Student[request.data['Roll_number']] = biden_encoding2
+       Encode_Student[request.data['rollnumber']] = biden_encoding2
        ADD_Student = Student(
-          Roll_Number = request.data['Roll_number'],
-          Studying_Year = StudyingYear(Studying_Year=request.data['Studying_Year']),
-          Branch = Branche(Branch = request.data['Branch']),
-          Section = Section(Section = request.data['Section']),
-          Semester = Semester(Semester = request.data['Semester']),
+          Roll_Number = request.data['rollnumber'],
+          Studying_Year = StudyingYear(Studying_Year=request.data['year']),
+          Branch = Branche(Branch = request.data['branch']),
+          Section = Section(Section = request.data['section']),
+          Semester = Semester(Semester = request.data['semester']),
           Encoding = Encode_Student
        )
        ADD_Student.save()
-       return HttpResponse("Student Added Succesfully with Roll Number " + str(request.data['Roll_number']) +" !!")
+       res = "Student Added Succesfully with Roll Number " + str(request.data['rollnumber']) +" !!"
+       return HttpResponse(json.dumps(res))
 
 
 class AddAttendance(APIView):

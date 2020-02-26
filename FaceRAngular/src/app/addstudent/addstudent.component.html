@@ -1,0 +1,65 @@
+<mat-toolbar color="primary">
+    Add Student
+  <span class="flex-spacer"></span>
+  <button mat-button mat-dialog-close>&times;</button>
+</mat-toolbar>
+<div class="example-form">
+  <form [formGroup] = "loginForm" (ngSubmit)="onSubmit()">
+
+    <mat-form-field class="indesign">
+
+      <mat-label>Roll Number</mat-label>
+      <input matInput type="text" id = "rollnumber" formControlName="rollnumber" [ngClass]="{ 'is-invalid': submitted && f.rollnumber.errors }">
+
+      <div *ngIf="submitted && f.rollnumber.errors">
+        <div *ngIf="f.rollnumber.errors.required" style="color: red;">Roll Number is required</div>
+      </div>
+    </mat-form-field>
+
+    <mat-form-field class="indesign">
+
+      <mat-label>Branch</mat-label>
+      <input matInput type="text" id = "branch" formControlName="branch" [ngClass]="{ 'is-invalid': submitted && f.branch.errors }">
+
+      <div *ngIf="submitted && f.branch.errors">
+        <div *ngIf="f.branch.errors.required" style="color: red;">Branch is required</div>
+      </div>
+
+    </mat-form-field>
+
+    <mat-form-field class="indesign">
+      <mat-label>Studying Year</mat-label>
+      <input matInput type="text" id = "year" formControlName="year" [ngClass]="{ 'is-invalid': submitted && f.year.errors }">
+
+      <div *ngIf="submitted && f.year.errors">
+        <div *ngIf="f.year.errors.required" style="color: red;">Studying year is required</div>
+      </div>
+
+    </mat-form-field>
+
+    <mat-form-field class="indesign">
+      <mat-label>Section</mat-label>
+      <input matInput type="text" id = "section" formControlName="section" [ngClass]="{ 'is-invalid': submitted && f.section.errors }">
+
+      <div *ngIf="submitted && f.section.errors">
+        <div *ngIf="f.section.errors.required" style="color: red;">Section is required</div>
+      </div>
+    </mat-form-field>
+
+    <mat-form-field class="indesign">
+      <mat-label>Semester</mat-label>
+      <input matInput type="text" id = "semester" formControlName="semester" [ngClass]="{ 'is-invalid': submitted && f.semester.errors }">
+
+      <div *ngIf="submitted && f.semester.errors">
+        <div *ngIf="f.semester.errors.required" style="color: red;">Semester is required</div>
+      </div>
+    </mat-form-field>
+
+    <div style="margin-bottom: 10%;">
+      <span>Image</span>
+      <input type="file" (change)="onChange($event)" name="image">
+    </div>
+
+    <button mat-raised-button color="primary">Submit</button>
+  </form>
+</div>
