@@ -70,7 +70,6 @@ export class AttendanceComponent implements OnInit, AfterViewInit {
                         ' , Day - ' + val['Day_of_Week'];
         this.ALL_OPT.push(varible);
       }
-      console.log(data);
     });
   }
 
@@ -92,7 +91,6 @@ export class AttendanceComponent implements OnInit, AfterViewInit {
         for (const i in res) {
           this.datasource.push(i);
         }
-        console.log(this.datasource);
       },
       (err) => {
         alert(err);

@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ComponentFactoryResolver } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ComponentFactoryResolver, AfterContentInit } from '@angular/core';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -11,17 +11,19 @@ import { ProfiledialogComponent } from '../profiledialog/profiledialog.component
   styleUrls: ['./dashboard.component.css']
 })
 
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, AfterViewInit {
 
   constructor(private user: UserService, private router: Router, private http: HttpClient, public dialog: MatDialog ) {
   }
 
   facultyname: string;
 
-  response;
-  imageURL;
+  ngOnInit() {
+  }
 
-  ngOnInit() {}
+  ngAfterViewInit() {
+    this.user.username = this.facultyname;
+  }
 
   public setUser() {
     this.facultyname = localStorage.getItem('username');
@@ -38,7 +40,7 @@ export class DashboardComponent implements OnInit {
   }
 
   openprofile() {
-    this.router.navigate(['profile', this.facultyname]);
+    this.router.navigate(['profile']);
   }
 
   addstudent() {
@@ -46,7 +48,7 @@ export class DashboardComponent implements OnInit {
   }
 
   updateprofile() {
-    this.dialog.open(ProfiledialogComponent, {width: '600px', height: '550px'});
+    this.dialog.open(ProfiledialogComponent, {width: '1200px', height: '900px'});
   }
 
 }

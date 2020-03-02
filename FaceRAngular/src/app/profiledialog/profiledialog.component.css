@@ -1,3 +1,39 @@
 .flex-spacer{
     flex: 1 1 auto;
 }
+
+.addstyle{
+    margin-right: 8%;
+    text-align: center;
+}
+
+.addstyle2{
+    text-align: center;
+}
+
+.profilediv{
+    margin-top: 2%;
+    margin-bottom: 2%;
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.profile{
+    font-size: large;
+    font-weight: bold;
+    color: cornflowerblue;
+}
+
+.imaged{
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.imgd{
+    width: 25%;
+    margin-left: auto;
+    margin-right: auto;
+}

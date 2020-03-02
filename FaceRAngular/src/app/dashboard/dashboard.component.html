@@ -6,12 +6,13 @@
       <button mat-mini-fab color = "primary" [matMenuTriggerFor]="uploadmenu"><span class="fontawesome-th-list"></span></button>
       <mat-menu #uploadmenu="matMenu">
         <button mat-menu-item (click)="updateprofile()" style="font-weight: bold;letter-spacing: 3px;"><span class="entypo-up-circled" style="color: crimson;"></span> Update My Profile</button>
+
+        <button mat-menu-item (click)="addstudent()" style="font-weight: bold;letter-spacing: 3px;"><span class="entypo-user-add" style="color: crimson;"></span> Add a Student</button>
+        
         <button mat-menu-item>View Allocated Classes</button>
         <button mat-menu-item>Display Student's Attendance</button>
         <button mat-menu-item>Check Lectures taken for a Class</button>
         <button mat-menu-item>Display Student's Profile</button>
-
-        <button mat-menu-item (click)="addstudent()" style="font-weight: bold;letter-spacing: 3px;"><span class="entypo-user-add" style="color: crimson;"></span> Add a Student</button>
       </mat-menu>
     </span>
 

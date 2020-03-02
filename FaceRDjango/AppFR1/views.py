@@ -5,6 +5,7 @@ import face_recognition
 from .serializers import *
 from django.http import Http404
 from rest_framework import status
+from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework import generics
@@ -116,7 +117,7 @@ class GetProfile(generics.ListAPIView):
         user_name = self.request.query_params.get('user', None)
         if user_name is not None:
             usname = User.objects.filter(username = user_name)
-            queryset = queryset.filter(Id = usname[0].id)
+            queryset = queryset.filter(id = usname[0].id)
         return queryset 
 
 class GetUser(generics.ListAPIView):
@@ -126,3 +127,21 @@ class GetUser(generics.ListAPIView):
         if user_name is not None:
             queryset = User.objects.filter(username = user_name)
         return queryset
+
+class Updateprofile(APIView):
+    def patch(self,request,*args, **kwargs):
+        profile = get_object_or_404(Profile,pk = kwargs['id'])
+        serializer = Get_Profile(profile, data=request.data, partial=True)
+        if serializer.is_valid():
+            profile = serializer.save()
+            return Response(Get_Profile(profile).data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class Updateprofileuser(APIView):
+    def patch(self,request,*args, **kwargs):
+        profile = get_object_or_404(User,pk = kwargs['id'])
+        serializer = UserSerializer(profile, data=request.data, partial=True)
+        if serializer.is_valid():
+            profile = serializer.save()
+            return Response(UserSerializer(profile).data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

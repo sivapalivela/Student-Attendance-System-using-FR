@@ -87,27 +87,27 @@ class Attendance(models.Model):
         return str(self.Date)
 
 class Profile(models.Model):
-    Id = models.ForeignKey(User,on_delete=models.CASCADE)
-    Position = models.CharField(max_length=150)
-    Belonging_Dept = models.ForeignKey(Branche,on_delete=models.CASCADE)
-    Profile_Picture = models.ImageField(upload_to = 'profile_pics')
-    Bio = models.TextField(max_length=500)
-    DoB = models.DateField()
-    Gender = models.CharField(max_length = 20)
-    Location = models.CharField(max_length = 100)
-    Mobile = models.BigIntegerField()
-    Github = models.URLField()
-    Stackoverflow = models.URLField()
-    Facebook = models.URLField()
-    Linkedin = models.URLField()
-    Twitter = models.URLField()
+    id = models.ForeignKey(User, on_delete=models.CASCADE, primary_key = True)
+    Position = models.CharField(max_length=150,blank = True)
+    Belonging_Dept = models.ForeignKey(Branche,on_delete=models.CASCADE, blank = True)
+    Profile_Picture = models.ImageField(upload_to = 'profile_pics', blank = True)
+    Bio = models.TextField(max_length=500, blank = True)
+    DoB = models.DateField(blank = True)
+    Gender = models.CharField(max_length = 20, blank = True)
+    Location = models.CharField(max_length = 100, blank = True)
+    Mobile = models.BigIntegerField(blank = True)
+    Github = models.URLField(blank = True)
+    Stackoverflow = models.URLField(blank = True)
+    Facebook = models.URLField(blank = True)
+    Linkedin = models.URLField(blank = True)
+    Twitter = models.URLField(blank = True)
     Skills = JSONField(default = "")
     Achievements = JSONField(default = "")
     Education = JSONField(default = "")
     Languages = JSONField(default = "")
 
     def __str__(self):
-        return str(self.Id)
+        return str(self.id)
 
 
 

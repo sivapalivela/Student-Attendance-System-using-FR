@@ -3,3 +3,132 @@
   <span class="flex-spacer"></span>
   <button mat-button mat-dialog-close>&times;</button>
 </mat-toolbar>
+
+<div>
+  <form (ngSubmit)="profileupdate()">
+
+    <div class="profilediv">
+      <p class="profile">{{this.FirstName}} {{this.LastName}}</p>
+
+      <div class="imaged">
+        <img src="{{this.PROFILE_PICTURE}}" width="100px" height="100px" alt="Profile Image" style="display: block;border-radius: 50%;"/>
+      </div>
+  
+      <div class="imgd" style="margin-top: 2%;">
+        <input type="file" id="Profile_Picture" (change)="onChange($event)">
+      </div>
+    </div>
+
+    <div style="margin-top:2%;text-align: center;">
+
+      <div style="margin-bottom: 3%;">
+        <mat-form-field class="addstyle">
+          <mat-label>First Name</mat-label>
+          <input matInput type="text" id = "first_name" value="{{this.FirstName}}" (change)="formchange($event.target.id,$event.target.value)">
+        </mat-form-field>
+
+        <mat-form-field class="addstyle">
+          <mat-label>Last Name</mat-label>
+          <input matInput type="text" id = "last_name" value="{{this.LastName}}" (change)="formchange($event.target.id,$event.target.value)">
+        </mat-form-field>
+
+        <mat-form-field class="addstyle">
+          <mat-label>Position</mat-label>
+          <input matInput type="text" id = "Position" value="{{this.Position}}" (change)="formchange($event.target.id,$event.target.value)">
+        </mat-form-field>
+
+        <mat-form-field class="addstyle2">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" id = "email" value="{{this.Email}}" (change)="formchange($event.target.id, $event.target.value)">
+        </mat-form-field>
+      </div>
+
+      <div style="margin-bottom: 3%;">
+        <mat-form-field class="addstyle">
+          <mat-label>Mobile Number</mat-label>
+          <input matInput type="text" id = "Mobile" value="{{this.Mobile}}" (change)="formchange($event.target.id, $event.target.value)">
+        </mat-form-field>
+
+        <mat-form-field class="addstyle">
+          <mat-label>Belonging Department</mat-label>
+          <input matInput type="text" id = "Belonging_Dept" value="{{this.BelongingDept}}" (change)="formchange($event.target.id, $event.target.value)">
+        </mat-form-field>
+
+        <mat-form-field class="addstyle">
+          <mat-label>Date of Birth</mat-label>
+          <input matInput type="date" id = "DoB" value="{{this.DoB}}" (change)="formchange($event.target.id, $event.target.value)">
+        </mat-form-field>
+
+        <mat-form-field class="addstyle2">
+          <mat-label>Gender</mat-label>
+          <input matInput type="text" id = "Gender" value="{{this.Gender}}" (change)="formchange($event.target.id, $event.target.value)">
+        </mat-form-field>
+      </div>
+
+      <div style="margin-bottom: 3%;">
+        <mat-form-field class="addstyle">
+          <mat-label>Location</mat-label>
+          <input matInput type="text" id = "Location" value="{{this.Location}}" (change)="formchange($event.target.id, $event.target.value)">
+        </mat-form-field>
+
+        <mat-form-field class="addstyle">
+          <mat-label>Github</mat-label>
+          <input matInput type="url" id="Github" value="{{this.Github}}" (change)="formchange($event.target.id, $event.target.value)"/>
+        </mat-form-field>
+
+        <mat-form-field class="addstyle">
+          <mat-label>Linkedin</mat-label>
+          <input matInput type="url" id="Linkedin" value="{{this.Linkedin}}" (change)="formchange($event.target.id, $event.target.value)"/>
+        </mat-form-field>
+
+        <mat-form-field class="addstyle2">
+          <mat-label>Facebook</mat-label>
+          <input matInput type="url" id = "Facebook" value="{{this.Facebook}}" (change)="formchange($event.target.id, $event.target.value)"/>
+        </mat-form-field>
+      </div>
+
+      <div style="margin-bottom: 3%;">
+        <mat-form-field class="addstyle">
+          <mat-label>Twitter</mat-label>
+          <input matInput type="url" id = "Twitter" value="{{this.Twitter}}" (change)="formchange($event.target.id, $event.target.value)"/>
+        </mat-form-field>
+
+        <mat-form-field class="addstyle">
+          <mat-label>Stackoverflow</mat-label>
+          <input matInput type="url" id = "Stackoverflow" value="{{this.Stackoverflow}}" (change)="formchange($event.target.id, $event.target.value)"/>
+        </mat-form-field>
+
+        <mat-form-field class="addstyle">
+          <mat-label>Bio</mat-label>
+          <textarea matInput id="Bio" value="{{this.Bio}}" (change)="formchange($event.target.id, $event.target.value)"></textarea>
+        </mat-form-field>
+
+        <mat-form-field class="addstyle2">
+          <mat-label>Skills</mat-label>
+          <textarea matInput id="Skills" value="{{this.Skills}}" (change)="formchange($event.target.id, $event.target.value)"></textarea>
+        </mat-form-field>
+      </div>
+
+      <div style="margin-bottom: 3%;">
+        <mat-form-field class="addstyle">
+          <mat-label>Education</mat-label>
+          <textarea matInput id="Education" value="{{this.Education}}" (change)="formchange($event.target.id, $event.target.value)"></textarea>
+        </mat-form-field>
+
+        <mat-form-field class="addstyle">
+          <mat-label>Achievements</mat-label>
+          <textarea matInput id="Achievements" value="{{this.Achievement}}" (change)="formchange($event.target.id, $event.target.value)"></textarea>
+        </mat-form-field>
+
+        <mat-form-field class="addstyle2">
+          <mat-label>Languages</mat-label>
+          <textarea matInput id="Languages" value="{{this.Languages}}" (change)="formchange($event.target.id, $event.target.value)"></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div style="width: 7%;margin-left: auto;margin-right: auto;">
+      <button mat-raised-button color="primary">Update</button>
+    </div>
+  </form>
+</div>
