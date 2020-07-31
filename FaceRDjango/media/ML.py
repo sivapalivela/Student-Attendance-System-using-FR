@@ -6,8 +6,6 @@ import cv2
 from AppFR1.models import *
 from FaceRDjango.settings import MEDIA_ROOT
 
-# Load Images from the folder
-
 # image_files = os.listdir("16- 4th years'/")
 count = 1
 vidcap = ''
