@@ -12,15 +12,13 @@ from FaceRDjango.settings import MEDIA_ROOT
 count = 1
 vidcap = ''
 # change path to your local system
-# path = 'P:\Project\Student-Attendance-System-using-FR\FaceRDjango\media\\'
-path = '/home/shiva/Downloads/Student-Attendance-System-using-FR/FaceRDjango/media/'
+path = '/home/shiva/Student-Attendance-System-using-FR/FaceRDjango/media/'
 
 def getStudentencoding(image_path):
     image = face_recognition.load_image_file(image_path)
     face_locations = face_recognition.face_locations(image)
     biden_encoding = face_recognition.face_encodings(image,face_locations)
     # print("No of encoding in ",image_path,'\n',len(biden_encoding))
-    # print("Faces",len(face_locations))
     return biden_encoding
 
 def getFrame(sec):
@@ -37,6 +35,7 @@ def getFrame(sec):
 def getFileDetails():
     fileName = os.listdir(path)
     fileName.remove('ML.py')
+    fileName.remove('profile_pics')
     fileName.remove('3rdyears')
     fileName.remove('__pycache__')
     return fileName
@@ -84,39 +83,53 @@ def getClassEncodings(year,sem,branch,sec):
 
 def getAttendance(year,sem,branch,sec,videoName):
     # classEncodings = getClassEncodings(year,sem,branch,sec)
-    classEncodings = []
+    classEncoding = []
     classStudents = []
     VideoToFrame(videoName)
     present_students = dict()
     image_files = getFileDetails()
-    source_image_files = os.listdir(MEDIA_ROOT+'/3rdyears/secB/')
+    source_image_files = os.listdir(MEDIA_ROOT+'/3rdyears/secB')
     for i in source_image_files:
-        classEncodings.append(getStudentencoding(MEDIA_ROOT+'/3rdyears/secB/'+i))
+        classEncoding.append(getStudentencoding(MEDIA_ROOT+'/3rdyears/secB/'+i))
         classStudents.append(i[:10])
-    print("class len :",len(classEncodings))
-    print(classEncodings[0])
     for image_name in image_files:
         if '.mp4' in image_name:
             continue
         bidden_encoding = getStudentencoding(path+image_name)
         print(len(bidden_encoding))
         for unknown_encoding in bidden_encoding :
-            for student_roll_number,student_encoding in zip(classStudents,classEncodings):
+            for student_roll_number,student_encoding in zip(classStudents,classEncoding):
                 if student_roll_number in present_students:
                     continue
                 result = face_recognition.compare_faces([student_encoding], unknown_encoding)
                 if result:
                     print("Added   ",student_roll_number)
                     present_students[student_roll_number] = True
+    # print(source_image_files)
+    # for image_name in image_files:
+    #     if '.mp4' in image_name:
+    #         continue
+    #     bidden_encoding  = getStudentencoding(path+image_name)
+    #     for unknown_encoding in bidden_encoding:
+    #         for student_file_name in source_image_files:
+    #             student_image = face_recognition.load_image_file(MEDIA_ROOT+'/3rdyears/secB'+student_file_name)
+    #             known_encoding = face_recognition.face_encodings(student_image)
+    #             if student_file_name in present_students:
+    #                 continue
+    #             result = face_recognition.compare_faces([known_encoding],unknown_encoding)
+    #             if result:
+    #                 present_students[student_file_name] = True
     # print(list(present_students.keys()))
     # print(len(present_students))
+    # return present_students
     print("Execution Successful")
     d = dict()
+    c = 3
     for i in list(present_students)[:15]:
         d[i] = 'present'
     return d
 
 
 
-# VideoToFrame()
+# VideoToFrame("Video2.mp4")
 # play()s

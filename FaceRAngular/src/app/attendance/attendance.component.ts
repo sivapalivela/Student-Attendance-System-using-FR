@@ -55,6 +55,8 @@ export class AttendanceComponent implements OnInit, AfterViewInit {
     this.form.get('Branch').setValue(new_Br[2]);
     this.form.get('Studying_Year').setValue(new_Br[7]);
     this.form.get('Semester').setValue(new_Br[11]);
+    this.form.get('Section').setValue(new_Br[15])
+    this.form.get('Period').setValue(new_Br[19]);
   }
 
   get_data(teacher) {
