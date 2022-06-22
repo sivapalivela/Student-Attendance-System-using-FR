@@ -10,7 +10,7 @@ ecdsa==0.15
 face-recognition==1.2.3
 face-recognition-models==0.3.0
 jsonfield==2.0.2
-numpy==1.18.1
+numpy==1.22.0
 Pillow==7.0.0
 pyasn1==0.4.8
 PyJWT==1.7.1
